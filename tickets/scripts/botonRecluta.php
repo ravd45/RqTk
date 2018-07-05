@@ -2,7 +2,7 @@
 session_start();
 include '../include/conectardb.php';
 $idReq = $_POST['folio'];
-//$comentario = $_POST['comentario'];
+$comentario = $_POST['comentario'];
 $comentarioT = $_POST['comentarioT'];
 date_default_timezone_set('America/Mexico_city');
 $fecha = date("Y-m-d  H:i:s");
@@ -19,8 +19,7 @@ while($row = $info->fetch_assoc()) {
 	if($comentarioT != NULL){
 		$comentarioTania = "UPDATE reqRecluta SET comentarioTan = '".$comentarioT."' WHERE idreqRecluta = ".$idReq.";";
 		if(!$inserta = mysqli_query($conn, $comentarioTania)){
-				echo "error: ". $comentarioTania;
-			//echo "<script language='javascript'>window.location='../index.php';</script>";
+			echo "<script language='javascript'>window.location='../index.php';</script>";
 			} else{
 
 				echo "<script language='javascript'>window.location='../index.php';</script>";

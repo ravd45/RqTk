@@ -47,6 +47,7 @@ while ($row = $info->fetch_assoc()) {
 			echo"	
 			<form method='POST' action='scripts/botonOskme.php'>
 			<input type='number' value='".$folio."' style='display: none;' name='folio'>
+			<input type='text' value='$comentario' style='display: none;' name='comentario'>
 			<i class='material-icons prefix'>comment</i>
 									<label for='icon_prefix'>Comentario</label>
 			<input type='text' name='comentarioT'>
@@ -55,6 +56,7 @@ while ($row = $info->fetch_assoc()) {
 			</button>
 			</form>";
 		}
+	}
 		break;
 
 		case 2:
@@ -77,6 +79,7 @@ while ($row = $info->fetch_assoc()) {
 			echo"	
 			<form method='POST' action='scripts/botonOskme.php'>
 			<input type='number' value='".$folio."' style='display: none;' name='folio'>
+			<input type='text' value='$comentario' style='display: none;' name='comentario'>
 			<i class='material-icons prefix'>comment</i>
 									<label for='icon_prefix'>Comentario</label>
 			<input type='text' name='comentarioT'>
@@ -85,14 +88,46 @@ while ($row = $info->fetch_assoc()) {
 			</button>
 			</form>";
 		}
+	}
 		break;
 
 		case 3:
-		if ($comentario != NULL){
+		if ($comentarioT != NULL) {
+			echo"<span class='card-title teal accent-3 white-text'>Osk-".$folio."A </span>";
+		}else{
+			if ($comentario != NULL){
 			echo"<span class='card-title purple white-text'>Osk-".$folio."A </span>";
+				if ($_SESSION['idUsuario']==6) {
+			echo"	
+			<form method='POST' action='scripts/botonOskme.php'>
+			<input type='number' value='".$folio."' style='display: none;' name='folio'>
+			<input type='text' value='$comentario' style='display: none;' name='comentario'>
+			<i class='material-icons prefix'>comment</i>
+									<label for='icon_prefix'>Comentario</label>
+			<input type='text' name='comentarioT'>
+			<button class='btn-floating btn-small waves-effect waves-light teal accent-3' type='submit' name='action'>
+			<i class='material-icons right'>comment</i>
+			</button>
+			</form>";
+		}
 		}else{
 			echo"<span class='card-title green white-text'>Osk-".$folio."A </span>";
+			if ($_SESSION['idUsuario']==6) {
+			echo"	
+			<form method='POST' action='scripts/botonOskme.php'>
+			<input type='number' value='".$folio."' style='display: none;' name='folio'>
+			<input type='text' value='$comentario' style='display: none;' name='comentario'>
+			<i class='material-icons prefix'>comment</i>
+									<label for='icon_prefix'>Comentario</label>
+			<input type='text' name='comentarioT'>
+			<button class='btn-floating btn-small waves-effect waves-light teal accent-3' type='submit' name='action'>
+			<i class='material-icons right'>comment</i>
+			</button>
+			</form>";
 		}
+		}
+		}
+		
 
 		break;
 	}
@@ -111,9 +146,13 @@ while ($row = $info->fetch_assoc()) {
 		echo"	<span class='blue-text'>Plan:</span>".$plan."
 		<br>";
 	}
-	echo"<span class='blue-text'>Usuario:</span>".$nombre."";
+	echo"<span class='blue-text'>Usuario:</span>".$nombre."<br>";
 	if($comentario !=NULL){
 		echo"	<strong><span class='purple-text'>Comentario:</span>".$comentario."</strong>
+		<br>";
+	}
+	if ($comentarioT != NULL) {
+		echo"	<strong><span class='teal-text'>Comentario Tania:</span>".$comentarioT."</strong>
 		<br>";
 	}
 	echo"	</div>

@@ -52,6 +52,7 @@ while ($row = $info->fetch_assoc()) {
 			echo"	
 			<form method='POST' action='scripts/botonRecluta.php'>
 			<input type='number' value='".$folio."' style='display: none;' name='folio'>
+			<input type='text' value='$comentario' style='display: none;' name='comentario'>
 			<i class='material-icons prefix'>comment</i>
 									<label for='icon_prefix'>Comentario</label>
 			<input type='text' name='comentarioT'>
@@ -144,7 +145,7 @@ while ($row = $info->fetch_assoc()) {
 		<br>";
 	}
 	if ($comentarioT != NULL) {
-		echo"<strong><span class='teal-text darken-4'>Comentario: </span>".$comentarioT."</strong>";
+		echo"<strong><span class='teal-text darken-4'>Comentario Tania: </span>".$comentarioT."</strong>";
 	}
 	echo"	</div>
 	<div class='card-action'>

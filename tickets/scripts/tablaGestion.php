@@ -1,7 +1,7 @@
 <?php 
 include 'include/conectardb.php';
 
-$sqlGestion="SELECT rg.idreqGestion, rg.descripcion, rg.fecha, rg.idEstatus, u.nombre, ce.estatus, rg.fechaResuelto, rg.fechaProceso, rg.comentario from reqGestion rg
+$sqlGestion="SELECT rg.idreqGestion, rg.descripcion, rg.fecha, rg.idEstatus, u.nombre, ce.estatus, rg.fechaResuelto, rg.fechaProceso, rg.comentario, rg.comentarioTan from reqGestion rg
 INNER JOIN usuario u on u.idUsuario = rg.idUsuario
 INNER JOIN catalogoEstatus ce on ce.idcatalogoEstatus = rg.idEstatus ORDER BY rg.fecha DESC;";
 $info=mysqli_query($conn, $sqlGestion);
@@ -19,6 +19,7 @@ while ($row = $info->fetch_assoc()) {
 	$status = $row['idEstatus'];
 	$estatus = $row['estatus'];
 	$comentario = $row['comentario'];
+	$comentarioT = $row['comentarioTan'];
 	$cont++;
 	echo"   <div class='col m4'>
 	<div class='card '>
@@ -38,6 +39,21 @@ while ($row = $info->fetch_assoc()) {
 			</form>";
 
 		}
+		if ($comentarioT == NULL) {
+		if ($_SESSION['idUsuario']==6) {
+			echo"	
+			<form method='POST' action='scripts/botonGestion.php'>
+			<input type='number' value='".$folio."' style='display: none;' name='folio'>
+			<input type='text' value='$comentario' style='display: none;' name='comentario'>
+			<i class='material-icons prefix'>comment</i>
+									<label for='icon_prefix'>Comentario</label>
+			<input type='text' name='comentarioT'>
+			<button class='btn-floating btn-small waves-effect waves-light teal accent-3' type='submit' name='action'>
+			<i class='material-icons right'>comment</i>
+			</button>
+			</form>";
+		}
+	}
 		break;
 
 		case 2:
@@ -55,24 +71,76 @@ while ($row = $info->fetch_assoc()) {
 			</form>";
 
 		}
+		if ($comentarioT == NULL) {
+		if ($_SESSION['idUsuario']==6) {
+			echo"	
+			<form method='POST' action='scripts/botonGestion.php'>
+			<input type='number' value='".$folio."' style='display: none;' name='folio'>
+			<input type='text' value='$comentario' style='display: none;' name='comentario'>
+			<i class='material-icons prefix'>comment</i>
+									<label for='icon_prefix'>Comentario</label>
+			<input type='text' name='comentarioT'>
+			<button class='btn-floating btn-small waves-effect waves-light teal accent-3' type='submit' name='action'>
+			<i class='material-icons right'>comment</i>
+			</button>
+			</form>";
+		}
+	}
 		break;
 
 		case 3:
+		if ($comentarioT != NULL) {
+			echo"<span class='card-title teal accent-3 white-text'>folio: #".$folio."A </span>";
+		}else{
 		if ($comentario != NULL){
 			echo"<span class='card-title purple white-text'>folio: #".$folio."A </span>";
+			if ($comentarioT == NULL) {
+		if ($_SESSION['idUsuario']==6) {
+			echo"	
+			<form method='POST' action='scripts/botonGestion.php'>
+			<input type='number' value='".$folio."' style='display: none;' name='folio'>
+			<input type='text' value='$comentario' style='display: none;' name='comentario'>
+			<i class='material-icons prefix'>comment</i>
+									<label for='icon_prefix'>Comentario</label>
+			<input type='text' name='comentarioT'>
+			<button class='btn-floating btn-small waves-effect waves-light teal accent-3' type='submit' name='action'>
+			<i class='material-icons right'>comment</i>
+			</button>
+			</form>";
+		}
+	}
 		}else{
 			echo"<span class='card-title green white-text'>folio: #".$folio."A </span>";
+			if ($comentarioT == NULL) {
+		if ($_SESSION['idUsuario']==6) {
+			echo"	
+			<form method='POST' action='scripts/botonGestion.php'>
+			<input type='number' value='".$folio."' style='display: none;' name='folio'>
+			<input type='text' value='$comentario' style='display: none;' name='comentario'>
+			<i class='material-icons prefix'>comment</i>
+									<label for='icon_prefix'>Comentario</label>
+			<input type='text' name='comentarioT'>
+			<button class='btn-floating btn-small waves-effect waves-light teal accent-3' type='submit' name='action'>
+			<i class='material-icons right'>comment</i>
+			</button>
+			</form>";
 		}
-
+	}
+		}
+	}
 		break;
 	}
 	echo"
 	<span class='blue-text'>Descripción: </span><span>".$descripcion."</span>
 	<br> 
-	<span class='blue-text'>Usuario:</span>".$nombre."";
+	<span class='blue-text'>Usuario:</span>".$nombre."<br>";
 	if($comentario !=NULL){
 
 		echo"	<strong><span class='purple-text'>Comentario:</span>".$comentario."</strong>
+		<br>";
+	}
+	if ($comentarioT != NULL) {
+		echo"	<strong><span class='teal-text'>Comentario Tania:</span>".$comentarioT."</strong>
 		<br>";
 	}
 
